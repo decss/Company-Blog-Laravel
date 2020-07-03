@@ -26,10 +26,13 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+// Route::group(['middleware' => ['web']], function () {
+//     //
+// });
+// Route::auth();
+// Route::get('/home', 'HomeController@index');
 
-Route::auth();
-
-Route::get('/home', 'HomeController@index');
+Route::resource('/', 'IndexController', [
+    'only' => 'index',
+    'names' => ['index' => 'home'],
+]);
