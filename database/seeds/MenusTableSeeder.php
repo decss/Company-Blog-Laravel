@@ -14,31 +14,31 @@ class MenusTableSeeder extends Seeder
         $data = [
             [
                 'title' => 'Главная',
-                'path'  => 'http://corporate.loc',
+                'path'  => 'http://corporate.local',
             ],
             [
                 'title' => 'Блог',
-                'path'  => 'http://corporate.loc/articles',
+                'path'  => 'http://corporate.local/articles',
             ],
             [
                 'title' => 'Компьютеры',
-                'path'  => 'http://corporate.loc/articles/cat/computers',
+                'path'  => 'http://corporate.local/articles/cat/computers',
             ],
             [
                 'title' => 'Интересное',
-                'path'  => 'http://corporate.loc/articles/cat/iteresting',
+                'path'  => 'http://corporate.local/articles/cat/iteresting',
             ],
             [
                 'title' => 'Советы',
-                'path'  => 'http://corporate.loc/articles/cat/soveti',
+                'path'  => 'http://corporate.local/articles/cat/soveti',
             ],
             [
                 'title' => 'Портфолио',
-                'path'  => 'http://corporate.loc/portfolios',
+                'path'  => 'http://corporate.local/portfolios',
             ],
             [
                 'title' => 'Контакты',
-                'path'  => 'http://corporate.loc/contacts',
+                'path'  => 'http://corporate.local/contacts',
             ],
         ];
 

@@ -159,6 +159,7 @@ return [
         /*
          * Custom
          */
+        Lavary\Menu\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
@@ -206,6 +207,11 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Custom
+         */
+        'Menu'      => Lavary\Menu\Facade::class,
 
     ],
 

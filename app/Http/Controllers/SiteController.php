@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \Menu;
 use App\Repositories\MenusRepository;
 use Illuminate\Http\Request;
 
@@ -27,9 +28,9 @@ class SiteController extends Controller
 
     protected function renderOutput()
     {
-        $menu = $this->getMenu();
+        $menuBuilder = $this->getMenu();
 
-        $navigation = view(config('config.theme') . '.navigation')->render();
+        $navigation = view(config('config.theme') . '.navigation')->with('menu', $menuBuilder)->render();
         $this->vars = array_add($this->vars, 'navigation', $navigation);
 
         return view($this->template)->with($this->vars);
@@ -38,8 +39,22 @@ class SiteController extends Controller
     protected function getMenu()
     {
         $menu = $this->m_rep->get();
+        $menuBuilder = Menu::make('MyNav', function ($mBuilder) use ($menu) {
+            foreach ($menu as $item) {
+                // First level menu
+                if ($item->parent_id == 0) {
+                    $mBuilder->add($item->title, $item->path)->id($item->id);
 
-        return $menu;
+                // Parent menu items
+                } else {
+                    if ($mBuilder->find($item->parent_id)) {
+                        $mBuilder->find($item->parent_id)->add($item->title, $item->path)->id($item->id);
+                    }
+                }
+            }
+        });
+
+        return $menuBuilder;
     }
 
 
