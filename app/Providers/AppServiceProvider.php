@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Blade counters
+        Blade::directive('set', function($exp) {
+            list($name, $value) = explode(',', $exp);
+
+            return "<?php $name = $value; ?>";
+        });
     }
 
     /**
