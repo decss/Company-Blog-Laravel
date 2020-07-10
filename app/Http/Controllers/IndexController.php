@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Menu;
+use App\Repositories\ArticlesRepository;
 use App\Repositories\MenusRepository;
 use App\Repositories\PortfoliosRepository;
 use App\Repositories\SlidersRepository;
@@ -13,12 +14,13 @@ use App\Http\Requests;
 
 class IndexController extends SiteController
 {
-    public function __construct(SlidersRepository $s_rep, PortfoliosRepository $p_rep)
+    public function __construct(SlidersRepository $s_rep, PortfoliosRepository $p_rep, ArticlesRepository $a_rep)
     {
         parent::__construct(new MenusRepository(new Menu));
 
         $this->s_rep = $s_rep;
         $this->p_rep = $p_rep;
+        $this->a_rep = $a_rep;
 
         $this->bar = 'right';
         $this->template = config('config.theme') . '.index';
@@ -34,8 +36,11 @@ class IndexController extends SiteController
         $this->vars = array_add($this->vars, 'sliders', $sliders);
 
         $portfoliosItems = $this->getPortfolios();
-        $portfolios =view($theme . '.content')->with('portfolios', $portfoliosItems)->render();
+        $portfolios = view($theme . '.content')->with('portfolios', $portfoliosItems)->render();
         $this->vars = array_add($this->vars, 'content', $portfolios);
+
+        $articles = $this->getArticles();
+        $this->contentRightBar = view($theme . '.indexBar')->with('articles', $articles)->render();
 
         return $this->renderOutput();
     }
@@ -62,6 +67,13 @@ class IndexController extends SiteController
         $portfolios = $this->p_rep->get('*', Config::get('config.indexPortfolioCount'));
 
         return $portfolios;
+    }
+
+    private function getArticles()
+    {
+        $articles = $this->a_rep->get(['title', 'created_at', 'img', 'alias'], Config::get('config.indexArticlesCount'));
+
+        return $articles;
     }
 
     public function create()

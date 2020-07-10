@@ -28,10 +28,16 @@ class SiteController extends Controller
 
     protected function renderOutput()
     {
+        $theme = config('config.theme');
         $menuBuilder = $this->getMenu();
 
-        $navigation = view(config('config.theme') . '.navigation')->with('menu', $menuBuilder)->render();
+        $navigation = view($theme . '.navigation')->with('menu', $menuBuilder)->render();
         $this->vars = array_add($this->vars, 'navigation', $navigation);
+
+        if ($this->contentRightBar) {
+            $rightBar = view($theme . '.rightBar')->with('contentRightBar', $this->contentRightBar)->render();
+            $this->vars = array_add($this->vars, 'rightBar', $rightBar);
+        }
 
         return view($this->template)->with($this->vars);
     }
