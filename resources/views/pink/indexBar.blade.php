@@ -1,6 +1,6 @@
 @if($articles)
     <div class="widget-first widget recent-posts">
-        <h3>From our blog</h3>
+        <h3>{{ Lang::get('ru.latestPosts') }}</h3>
         <div class="recent-post group">
         @foreach($articles as $article)
             <div class="hentry-post group">

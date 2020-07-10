@@ -3,7 +3,7 @@
         <div class="hentry group">
             <div class="section portfolio">
 
-                <h3 class="title">Latest projects</h3>
+                <h3 class="title">{{ Lang::get('ru.latestProjects') }}</h3>
                 @foreach($portfolios as $i => $item)
                     @if($i == 0)
                         <div class="hentry work group portfolio-sticky portfolio-full-description">
