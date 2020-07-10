@@ -15,9 +15,15 @@ class SiteController extends Controller
     protected $a_rep;
     protected $m_rep;
 
+    protected $heads = [
+        'title' => null,
+        'keywords' => null,
+        'descr' => null,
+    ];
+
     protected $template;
     protected $vars;
-    protected $bar = false;
+    protected $bar = 'right';
     protected $contentRightBar = false;
     protected $contentLeftBar = false;
 
@@ -38,6 +44,11 @@ class SiteController extends Controller
             $rightBar = view($theme . '.rightBar')->with('contentRightBar', $this->contentRightBar)->render();
             $this->vars = array_add($this->vars, 'rightBar', $rightBar);
         }
+        $this->vars = array_add($this->vars, 'bar', $this->bar);
+        $this->vars = array_add($this->vars, 'heads', $this->heads);
+
+        $footer = view($theme . '.footer')->render();
+        $this->vars = array_add($this->vars, 'footer', $footer);
 
         return view($this->template)->with($this->vars);
     }
@@ -51,7 +62,7 @@ class SiteController extends Controller
                 if ($item->parent_id == 0) {
                     $mBuilder->add($item->title, $item->path)->id($item->id);
 
-                // Parent menu items
+                    // Parent menu items
                 } else {
                     if ($mBuilder->find($item->parent_id)) {
                         $mBuilder->find($item->parent_id)->add($item->title, $item->path)->id($item->id);

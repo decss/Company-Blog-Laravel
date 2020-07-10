@@ -42,6 +42,10 @@ class IndexController extends SiteController
         $articles = $this->getArticles();
         $this->contentRightBar = view($theme . '.indexBar')->with('articles', $articles)->render();
 
+        $this->heads['title'] = 'Главная страница';
+        $this->heads['keywords'] = 'Главная страница, корпоративный сайт';
+        $this->heads['descr'] = 'Главная страница корпроативного сайта';
+
         return $this->renderOutput();
     }
 
