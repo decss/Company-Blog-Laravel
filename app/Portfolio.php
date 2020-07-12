@@ -8,6 +8,6 @@ class Portfolio extends Model
 {
     public function filter()
     {
-        return $this->belongsTo('App\Filter', 'filter_alias', 'alias');
+        return $this->belongsTo(Filter::class, 'filter_alias', 'alias');
     }
 }

@@ -38,6 +38,8 @@ class ArticleController extends SiteController
         */
 
         $articles = $this->getArticles();
+        $content = view($theme . '.articlesContent')->with('articles', $articles)->render();
+        $this->vars = array_add($this->vars, 'content', $content);
 
         $this->heads['title'] = 'Главная страница';
         $this->heads['keywords'] = 'Главная страница, корпоративный сайт';
