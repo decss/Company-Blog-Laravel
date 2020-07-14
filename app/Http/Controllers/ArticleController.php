@@ -34,12 +34,12 @@ class ArticleController extends SiteController
         $comments = $this->getComments(Config::get('config.recentComments'));
         $portfolios = $this->getPortfolios(Config::get('config.recentPortfolios'));
         $this->contentRightBar = view($theme . '.articlesBar')
-            ->with(['comments', $comments, 'portfolios' => $portfolios])
+            ->with(['comments' => $comments, 'portfolios' => $portfolios])
             ->render();
 
-        $this->heads['title'] = 'Главная страница';
-        $this->heads['keywords'] = 'Главная страница, корпоративный сайт';
-        $this->heads['descr'] = 'Главная страница корпроативного сайта';
+        $this->heads['title'] = 'Статьи';
+        $this->heads['keywords'] = 'Статьи, корпоративный сайт';
+        $this->heads['descr'] = 'Статьи на корпроативном сайте';
 
         return $this->renderOutput();
     }
