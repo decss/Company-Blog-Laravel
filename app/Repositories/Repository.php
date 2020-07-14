@@ -29,7 +29,7 @@ abstract class Repository
     protected function check($result)
     {
         if ($result->isEmpty()) {
-            return $false;
+            return false;
         }
 
         $result->transform(function($item, $key) {
