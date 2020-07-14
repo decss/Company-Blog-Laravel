@@ -10,13 +10,17 @@ abstract class Repository
 {
     protected $model = false;
 
-    public function get($select = '*', $take = false, $pagination = false)
+    public function get($select = '*', $take = false, $pagination = false, $where = false)
     {
         // Get builder by calling select() on model
         $builder = $this->model->select($select);
 
         if ($take) {
             $builder->take($take);
+        }
+
+        if ($where) {
+            $builder->where($where[0], $where[1]);
         }
 
         if ($pagination) {

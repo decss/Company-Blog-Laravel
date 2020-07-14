@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Repositories\ArticlesRepository;
 use App\Repositories\CommentsRepository;
 use App\Repositories\MenusRepository;
@@ -23,11 +24,11 @@ class ArticleController extends SiteController
         $this->template = config('config.theme') . '.articles';
     }
 
-    public function index()
+    public function index($alias = null)
     {
         $theme = config('config.theme');
 
-        $articles = $this->getArticles();
+        $articles = $this->getArticles($alias);
         $content = view($theme . '.articlesContent')->with('articles', $articles)->render();
         $this->vars = array_add($this->vars, 'content', $content);
 
@@ -44,9 +45,37 @@ class ArticleController extends SiteController
         return $this->renderOutput();
     }
 
-    private function getArticles($alias = false)
+    public function show($alias = null)
     {
-        $articles = $this->a_rep->get('*', false, true);
+        $theme = config('config.theme');
+
+        $article = $this->a_rep->one($alias, true);
+        $content = view($theme . '.articleContent')->with('article', $article)->render();
+        $this->vars = array_add($this->vars, 'content', $content);
+
+        $comments = $this->getComments(Config::get('config.recentComments'));
+        $portfolios = $this->getPortfolios(Config::get('config.recentPortfolios'));
+        $this->contentRightBar = view($theme . '.articlesBar')
+            ->with(['comments' => $comments, 'portfolios' => $portfolios])
+            ->render();
+
+        $this->heads['title'] = 'Статьи';
+        $this->heads['keywords'] = 'Статьи, корпоративный сайт';
+        $this->heads['descr'] = 'Статьи на корпроативном сайте';
+
+        return $this->renderOutput();
+    }
+
+    private function getArticles($alias = null)
+    {
+        // Filter by category Id
+        $where = [];
+        if ($alias) {
+            $category = Category::where('alias', $alias)->first();
+            $where = ['category_id', $category->id];
+        }
+
+        $articles = $this->a_rep->get('*', false, true, $where);
 
         // Load articles related tables rows
         if ($articles) {

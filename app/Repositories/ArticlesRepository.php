@@ -13,4 +13,16 @@ class ArticlesRepository extends Repository
         $this->model = $article;
     }
 
+    public function one($alias, $withComments = false)
+    {
+        $article = $this->model->where('alias', $alias)->first();
+
+        if ($article && $withComments) {
+            $article->load('comments');
+            $article->comments->load('user');
+        }
+
+        return $article;
+    }
+
 }
