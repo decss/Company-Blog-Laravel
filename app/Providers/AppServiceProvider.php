@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Blade;
+use DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
 
             return "<?php $name = $value; ?>";
         });
+
+        // TEST: show queries
+        // DB::listen(function($query) {
+        //     dump($query->sql);
+        //     // echo "<h1>{$query->sql}</h1>";
+        // });
     }
 
     /**

@@ -50,7 +50,7 @@ class ArticleController extends SiteController
 
         // Load articles related tables rows
         if ($articles) {
-            // $articles->load('user', 'category', 'comments');
+            $articles->load('user', 'category', 'comments');
         }
 
         return $articles;
@@ -59,6 +59,10 @@ class ArticleController extends SiteController
     private function getComments($take)
     {
         $comments = $this->c_rep->get('*', $take);
+
+        if ($comments) {
+            $comments->load('user', 'article');
+        }
 
         return $comments;
     }
