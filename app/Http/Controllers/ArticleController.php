@@ -50,6 +50,9 @@ class ArticleController extends SiteController
         $theme = config('config.theme');
 
         $article = $this->a_rep->one($alias, true);
+        if ($article) {
+            $article->img = json_decode($article->img);
+        }
         $content = view($theme . '.articleContent')->with('article', $article)->render();
         $this->vars = array_add($this->vars, 'content', $content);
 
