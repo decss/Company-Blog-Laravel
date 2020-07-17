@@ -31,7 +31,7 @@
         @if(!$comments->isEmpty())
             @foreach($comments as $comment)
                 <div class="the-post group">
-                    <div class="avatar"><img alt="" src="{{ config('config.theme') }}/images/avatar/unknow55.png" class="avatar"/></div>
+                    <div class="avatar"><img alt="" src="/{{ config('config.theme') }}/images/avatar/unknow55.png" class="avatar"/></div>
                     <span class="author"><strong><a href="mailto:{{ $comment->user->email }}">{{ $comment->user->name }}</a></strong> in</span>
                     <a class="title" href="{{ route('articles.show', ['alias' => $comment->article->alias]) }}">{{ $comment->article->title }}</a>
                     <p class="comment">

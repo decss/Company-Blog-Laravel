@@ -8,9 +8,9 @@ Author URI: http://www.yourinspirationtheme.com
 Tags: white, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, flexible-width, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, front-page-post-form, full-width-template, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
 
 
-	Copyright: (c) 2012 Your Inspiration Themes.
-	License: GNU General Public License v3.0
-	License URI: http://www.gnu.org/licenses/gpl-3.0.txt
+    Copyright: (c) 2012 Your Inspiration Themes.
+    License: GNU General Public License v3.0
+    License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 */
 /* 
@@ -87,8 +87,8 @@ pre { margin-bottom: 10px; margin-top: 10px; }
 /* ===== HEADINGS ===== */
 h1, h2, h3, h4, h5, h6,
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-	font-family: 'Rokkitt', 'Droid Sans', 'Verdana', 'Arial', sans-serif;
-	font-size: 12px;
+    font-family: 'Rokkitt', 'Droid Sans', 'Verdana', 'Arial', sans-serif;
+    font-size: 12px;
 }
 h1 span, h2 span, h3 span, h4 span, h5 span, h6 span { color: #A05F02; }
 
@@ -330,7 +330,7 @@ html { min-height:101% }
     z-index: 99999;
 }
 /*.no_js #header .menu > ul:after, .no_js #header .menu > ul ul:after{
-	clear: both;
+    clear: both;
     content: ".";
     display: block;
     height: 0;
@@ -802,12 +802,12 @@ form input[type="text"], form textarea { border: 1px solid #CFCFCF; -webkit-tran
     margin-bottom: 10px;
 }
 .testimonial-page .testimonial-text-full blockquote {
-	padding-left: 0px;
-	padding-bottom: 0px;
-	background-position: 0 25px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    background-position: 0 25px;
 }
 .testimonial-page .testimonial-text-full blockquote p:last-child{
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 .testimonial-page .testimonial-text-full.testimonial-thumb {
     margin-bottom: 85px !important;
@@ -843,8 +843,23 @@ form input[type="text"], form textarea { border: 1px solid #CFCFCF; -webkit-tran
     font-size: 12px;
 }
 .testimonial-post-page .wp-post-image {
-	border-radius: 15px 15px 15px 15px;
+    border-radius: 15px 15px 15px 15px;
     height: auto;
     max-width: 100%;
     width: auto;
+}
+
+.wrap_result {
+    background-color: #f0f2f0;
+    border: 2px solid #2C8DB8;
+    border-radius: 10px;
+    padding: 20px;
+    position: fixed;
+    left: 35%;
+    top:45%;
+    width:300px;
+    height: 80px;
+    text-align: center;
+    display: none;
+    z-index: 5005
 }
