@@ -14,10 +14,9 @@ use Auth;
 class CommentController extends Controller
 {
     /**
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      */
     public function store(Request $request)
     {
@@ -48,7 +47,16 @@ class CommentController extends Controller
         $article = Article::find($data['article_id']);
         $article->comments()->save($comment);
 
+        $comment->load('user');
+        $data['id'] = $comment->id;
+        $data['created_at'] = $comment->created_at;
+        $data['email'] = (!empty($data['email'])) ? $data['email'] : $comment->user->email;
+        $data['name'] = (!empty($data['name'])) ? $data['name'] : $comment->user->name;
 
+        $view = view(config('config.theme') . '.commentOne')->with('comment', $data)->render();
+
+        return Response::json(['success' => true, 'comment' => $view, 'data' => $data]);
+
+        exit;
     }
-
 }
