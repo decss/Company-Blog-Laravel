@@ -5,7 +5,13 @@
             <div class="comment-author vcard">
                 <img alt="" src="/{{ config('config.theme') }}/images/avatar/unknow.png" class="avatar" height="75"
                      width="75"/>
-                <cite class="fn">{{ $comment->user->name }}</cite>
+                <cite class="fn">
+                    @if ($comment->user)
+                        {{ $comment->user->name }}
+                    @else
+                        {{ $comment->name }}
+                    @endif
+                </cite>
             </div>
 
             <div class="comment-meta commentmetadata">

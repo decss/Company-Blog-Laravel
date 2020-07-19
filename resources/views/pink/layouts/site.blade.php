@@ -21,6 +21,7 @@
     <title>{{ $heads['title'] or 'Pink' }}</title>
     <meta name="description" content="{{ $heads['title'] or 'Pink description' }}">
     <meta name="keywords" content="{{ $heads['title'] or 'Pink keywords' }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- [favicon] begin -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset(config('config.theme')) }}/images/favicon.ico"/>

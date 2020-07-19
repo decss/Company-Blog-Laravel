@@ -53,7 +53,6 @@ class ArticleController extends SiteController
         if ($article) {
             $article->img = json_decode($article->img);
         }
-        // dump($article->comments);
         // dd($article->comments->groupBy('parent_id'));
 
         $content = view($theme . '.articleContent')->with('article', $article)->render();

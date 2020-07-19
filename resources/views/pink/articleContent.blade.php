@@ -73,12 +73,13 @@
             </h3>
             <form action="{{ route('comment.store') }}" method="post" id="commentform">
                 {{--@csrf--}}
-                {{ csrf_field() }}
+                {!! csrf_field() !!}
+                {!! csrf_token() !!}
 
-                @if(Auth::check())
+                {{--@if(Auth::check())--}}
                     <p class="comment-form-author">
-                        <label for="author">Name</label>
-                        <input id="author" name="author" type="text" value="" size="30" aria-required="true"/>
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" value="" size="30" aria-required="true"/>
                     </p>
                     <p class="comment-form-email">
                         <label for="email">Email</label>
@@ -88,15 +89,15 @@
                         <label for="url">Website</label>
                         <input id="url" name="url" type="text" value="" size="30"/>
                     </p>
-                @endif
+                {{--@endif--}}
                 <p class="comment-form-comment">
-                    <label for="comment">Your comment</label>
-                    <textarea id="comment" name="comment" cols="45" rows="8"></textarea>
+                    <label for="text">Your comment</label>
+                    <textarea id="text" name="text" cols="45" rows="8"></textarea>
                 </p>
                 <div class="clear"></div>
                 <p class="form-submit">
                     <input id="comment_post_ID" type="hidden" name="comment_post_ID" value="{{ $article->id }}">
-                    <input id="comment_parent" type="hidden" name="comment_parent" value="">
+                    <input id="comment_parent" type="hidden" name="comment_parent" value="0">
                     <input name="submit" type="submit" id="submit" value="Post Comment"/>
                 </p>
 
