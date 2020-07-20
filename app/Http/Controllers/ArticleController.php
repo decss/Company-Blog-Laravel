@@ -64,9 +64,13 @@ class ArticleController extends SiteController
             ->with(['comments' => $comments, 'portfolios' => $portfolios])
             ->render();
 
-        $this->heads['title'] = 'Статьи';
-        $this->heads['keywords'] = 'Статьи, корпоративный сайт';
-        $this->heads['descr'] = 'Статьи на корпроативном сайте';
+        $this->heads['title'] = 'Статьи | ' . $article->title;
+        $this->heads['keywords'] = $article->meta_key
+            ? $article->meta_key
+            : 'Статьи, корпоративный сайт, ' . $article->title;
+        $this->heads['descr'] = $article->meta_descr
+            ? $article->meta_descr
+            : 'Статьи на корпроативном сайте. ' . $article->title;
 
         return $this->renderOutput();
     }
