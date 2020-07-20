@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes"/>
 
     <title>{{ $heads['title'] or 'Pink' }}</title>
-    <meta name="keywords" content="{{ $heads['title'] or 'Pink keywords' }}">
+    <meta name="keywords" content="{{ $heads['keywords'] or 'Pink keywords' }}">
     <meta name="description" content="{{ $heads['descr'] or 'Pink description' }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
