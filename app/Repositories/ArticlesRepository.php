@@ -15,7 +15,7 @@ class ArticlesRepository extends Repository
 
     public function one($alias, $withComments = false)
     {
-        $article = $this->model->where('alias', $alias)->first();
+        $article = parent::one($alias);
 
         if ($article && $withComments) {
             $article->load('comments');

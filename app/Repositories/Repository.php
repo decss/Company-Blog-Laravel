@@ -36,7 +36,7 @@ abstract class Repository
             return false;
         }
 
-        $result->transform(function($item, $key) {
+        $result->transform(function ($item, $key) {
             // If img fiels is really JSON string
             if (is_string($item->img)) {
                 $json = json_decode($item->img);
@@ -46,6 +46,13 @@ abstract class Repository
             }
             return $item;
         });
+
+        return $result;
+    }
+
+    public function one($alias)
+    {
+        $result = $this->model->where('alias', $alias)->first();
 
         return $result;
     }

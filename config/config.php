@@ -9,5 +9,6 @@ return [
 
     'recentComments' => 2,
     'recentPortfolios' => 2,
+    'portfoliosCount' => 3,
 
 ];

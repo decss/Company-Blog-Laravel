@@ -17,6 +17,9 @@ class PortfolioController extends SiteController
         $this->bar = 'no';
         $this->p_rep = $p_rep;
 
+        $this->heads['title'] = 'Портфолио';
+        $this->heads['keywords'] = 'Портфолио, корпоративный сайт';
+        $this->heads['descr'] = 'Портфолио на корпроативном сайте';
         $this->template = config('config.theme') . '.portfolios';
     }
 
@@ -28,16 +31,30 @@ class PortfolioController extends SiteController
         $content = view($theme . '.portfoliosContent')->with('portfolios', $portfolios)->render();
         $this->vars = array_add($this->vars, 'content', $content);
 
-        $this->heads['title'] = 'Портфолио';
-        $this->heads['keywords'] = 'Портфолио, корпоративный сайт';
-        $this->heads['descr'] = 'Портфолио на корпроативном сайте';
+        return $this->renderOutput();
+    }
+
+    public function show($alias)
+    {
+        $theme = config('config.theme');
+
+        $portfolio = $this->p_rep->one($alias);
+        $portfolios = $this->getPortfolios(config('config.portfoliosCount'), false);
+
+        $content = view($theme . '.portfolioContent')->with(['portfolio' => $portfolio, 'portfolios' => $portfolios])->render();
+        $this->vars = array_add($this->vars, 'content', $content);
+
+        $this->heads['title'] = $portfolio->title;
 
         return $this->renderOutput();
     }
 
-    private function getPortfolios()
+    private function getPortfolios($take = false, $paginate = true)
     {
-        $portfolios = $this->p_rep->get('*', false, true);
+        $portfolios = $this->p_rep->get('*', $take, $paginate);
+        if ($portfolios) {
+            $portfolios->load('filter');
+        }
 
         return $portfolios;
     }
