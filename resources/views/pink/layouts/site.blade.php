@@ -97,7 +97,7 @@
 <!-- END HEAD -->
 
 <!-- START BODY -->
-<body class="no_js responsive stretched {{ Route::currentRouteName() == 'home' ? 'page-template-home-php' : '' }}">
+<body class="no_js responsive stretched {{ in_array(Route::currentRouteName(), ['home', 'portfolios.index']) ? 'page-template-home-php' : '' }}">
 
 <!-- START BG SHADOW -->
 <div class="bg-shadow">
@@ -141,6 +141,15 @@
 
         <!-- START SLIDER -->
         @yield('slider')
+
+        @if(Route::currentRouteName() == 'portfolios.index')
+            <div id="page-meta">
+                <div class="inner group">
+                    <h3>Welcome to my portfolio page</h3>
+                    <h4>... i hope you enjoy my works</h4>
+                </div>
+            </div>
+        @endif
 
         <div class="wrap_result"></div>
 
