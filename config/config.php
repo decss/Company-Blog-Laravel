@@ -11,4 +11,6 @@ return [
     'recentPortfolios' => 2,
     'portfoliosCount' => 3,
 
+    'mailAdmin' => env('MAIL_ADMIN', ''),
+
 ];

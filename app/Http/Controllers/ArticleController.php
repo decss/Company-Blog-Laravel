@@ -22,6 +22,10 @@ class ArticleController extends SiteController
 
         $this->bar = 'right';
         $this->template = config('config.theme') . '.articles';
+
+        $this->heads['title'] = 'Статьи';
+        $this->heads['keywords'] = 'Статьи, корпоративный сайт';
+        $this->heads['descr'] = 'Статьи на корпроативном сайте';
     }
 
     public function index($alias = null)
@@ -38,9 +42,7 @@ class ArticleController extends SiteController
             ->with(['comments' => $comments, 'portfolios' => $portfolios])
             ->render();
 
-        $this->heads['title'] = 'Статьи';
-        $this->heads['keywords'] = 'Статьи, корпоративный сайт';
-        $this->heads['descr'] = 'Статьи на корпроативном сайте';
+
 
         return $this->renderOutput();
     }

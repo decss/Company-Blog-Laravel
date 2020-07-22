@@ -45,6 +45,11 @@ class SiteController extends Controller
             $rightBar = view($theme . '.rightBar')->with('contentRightBar', $this->contentRightBar)->render();
             $this->vars = array_add($this->vars, 'rightBar', $rightBar);
         }
+        if ($this->contentLeftBar) {
+            $leftBar = view($theme . '.leftBar')->with('contentLeftBar', $this->contentLeftBar)->render();
+            $this->vars = array_add($this->vars, 'leftBar', $leftBar);
+        }
+        
         $this->vars = array_add($this->vars, 'bar', $this->bar);
         $this->vars = array_add($this->vars, 'heads', $this->heads);
 
