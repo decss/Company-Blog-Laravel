@@ -57,3 +57,7 @@ Route::get('articles/cat/{alias?}', [
 Route::resource('comment', 'CommentController', ['only' => ['store']]);
 
 Route::match(['get','post'],'/contacts',['uses'=>'ContactsController@index','as'=>'contacts']);
+
+Route::get('login', 'Auth\AuthController@showLoginForm');
+Route::post('login', 'Auth\AuthController@login');
+Route::get('logout', 'Auth\AuthController@logout');

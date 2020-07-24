@@ -23,6 +23,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $loginView;
+
     /**
      * Where to redirect users after login / registration.
      *
@@ -38,7 +40,24 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+
+        $this->loginView = config('config.theme') . '.login';
     }
+
+    public function showLoginForm()
+    {
+        $view = property_exists($this, 'loginView')
+                    ? $this->loginView : '';
+
+        if (view()->exists($view)) {
+            return view($view)->with([
+                'heads' => ['title' => 'Авторизация']
+            ]);
+        }
+
+        abort(404);
+    }
+
 
     /**
      * Get a validator for an incoming registration request.
