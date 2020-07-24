@@ -9,5 +9,18 @@ use App\Http\Controllers\Controller;
 
 class IndexController extends AdminController
 {
-    //
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->template = $this->theme . '.admin.index';
+    }
+
+    public function index()
+    {
+        $this->title = 'Панель администратора';
+
+        return $this->renderOutput();
+    }
 }
+

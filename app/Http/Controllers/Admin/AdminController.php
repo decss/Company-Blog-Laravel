@@ -18,6 +18,7 @@ class AdminController extends Controller
     protected $content = false;
     protected $title;
     protected $vars;
+    protected $theme;
 
     public function __construct()
     {
@@ -26,6 +27,8 @@ class AdminController extends Controller
         if (!$this->user) {
             abort(403);
         }
+
+        $this->theme = config('config.theme');
     }
 
     protected function renderOutput()
@@ -34,10 +37,10 @@ class AdminController extends Controller
 
         $menu = $this->getMenu();
 
-        $navigation = view(config('config.theme') . '.admin.navigation')->with('menu', $menu)->render();
+        $navigation = view($this->theme . '.admin.navigation')->with('menu', $menu)->render();
         $this->vars = array_add($this->vars, 'navigation', $navigation);
 
-        $footer = view(config('config.theme') . '.admin.footer')->render();
+        $footer = view($this->theme . '.admin.footer')->render();
         $this->vars = array_add($this->vars, 'footer', $footer);
 
         if ($this->content) {
