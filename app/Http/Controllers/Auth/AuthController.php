@@ -24,6 +24,7 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     protected $loginView;
+    protected $userName = 'login';
 
     /**
      * Where to redirect users after login / registration.
