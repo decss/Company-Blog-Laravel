@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Gate;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,6 +15,10 @@ class IndexController extends AdminController
         parent::__construct();
 
         $this->template = $this->theme . '.admin.index';
+
+        if (Gate::denies('VIEW_ADMIN')) {
+            abort(403);
+        }
     }
 
     public function index()
