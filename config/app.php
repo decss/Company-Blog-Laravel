@@ -159,9 +159,11 @@ return [
         /*
          * Custom
          */
-        Lavary\Menu\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Lavary\Menu\ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
@@ -212,6 +214,8 @@ return [
          * Custom
          */
         'Menu'      => Lavary\Menu\Facade::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
 
     ],
 
