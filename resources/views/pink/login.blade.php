@@ -17,7 +17,7 @@
                             </label>
                             <div class="input-prepend">
                                 <span class="add-on"><i class="icon-user"></i></span>
-                                <input type="text" name="login" id="login" class="required" value=""/>
+                                <input type="text" name="login" id="login" class="required" value="admin"/>
                             </div>
                             @if (isset($errors) && $errors->has('login'))
                                 <span class="help-block">
@@ -33,7 +33,7 @@
                             </label>
                             <div class="input-prepend">
                                 <span class="add-on"><i class="icon-lock"></i></span>
-                                <input type="password" name="password" class="required" value=""/>
+                                <input type="password" name="password" class="required" value="test@gmail.com"/>
                             </div>
                             @if (isset($errors) && $errors->has('name'))
                                 <span class="help-block">
