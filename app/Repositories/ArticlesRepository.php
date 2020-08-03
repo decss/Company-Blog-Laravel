@@ -41,6 +41,6 @@ class ArticlesRepository extends Repository
             $data['alias'] = str_slug($data['title']);
         }
 
-        dd($data);
+        // dd($data);
     }
 }
