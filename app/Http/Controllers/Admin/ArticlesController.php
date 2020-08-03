@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Article;
 use App\Category;
+use App\Http\Requests\ArticleRequest;
 use App\Repositories\ArticlesRepository;
 use Gate;
 use Illuminate\Http\Request;
@@ -41,7 +42,6 @@ class ArticlesController extends AdminController
         return $this->a_rep->get();
     }
 
-
     public function create()
     {
         if (Gate::denies('save', new Article)) {
@@ -67,10 +67,18 @@ class ArticlesController extends AdminController
         return $this->renderOutput();
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        //
+        $result = $this->a_rep->addArticle($request);
+        dd($request);
+
+        if (is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+
+        return redirect('/admin')->with($result);
     }
+
 
     public function show($id)
     {
