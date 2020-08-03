@@ -22,7 +22,7 @@
 				<span class="sublabel">Заголовок материала</span><br />
 			</label>
 			<div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-			{!! Form::text('keywords', isset($article->keywords) ? $article->keywords  : old('keywords'), ['placeholder'=>'Введите название страницы']) !!}
+			{!! Form::text('meta_key', isset($article->meta_key) ? $article->meta_key  : old('meta_key'), ['placeholder'=>'Введите название страницы']) !!}
 			 </div>
 		 </li>
 		 
@@ -33,7 +33,7 @@
 				<span class="sublabel">Заголовок материала</span><br />
 			</label>
 			<div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-			{!! Form::text('meta_desc', isset($article->meta_desc) ? $article->meta_desc  : old('meta_desc'), ['placeholder'=>'Введите название страницы']) !!}
+			{!! Form::text('meta_descr', isset($article->meta_descr) ? $article->meta_descr  : old('meta_descr'), ['placeholder'=>'Введите название страницы']) !!}
 			 </div>
 		 </li>
 		 

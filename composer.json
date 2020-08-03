@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "lavary/laravel-menu": "^1.7",
         "ext-json": "*",
-        "laravelcollective/html": "5.2.*"
+        "laravelcollective/html": "5.2.*",
+        "intervention/image": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

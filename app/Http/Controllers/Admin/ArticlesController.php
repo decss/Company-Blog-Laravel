@@ -70,7 +70,6 @@ class ArticlesController extends AdminController
     public function store(ArticleRequest $request)
     {
         $result = $this->a_rep->addArticle($request);
-        dd($request);
 
         if (is_array($result) && !empty($result['error'])) {
             return back()->with($result);
