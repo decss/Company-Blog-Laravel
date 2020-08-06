@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Article;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -19,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
      * @return void
      */
     public function boot(Router $router)
@@ -27,12 +28,17 @@ class RouteServiceProvider extends ServiceProvider
         $router->pattern('alias', '[\w-]+');
 
         parent::boot($router);
+
+        // Bind artucle selecting by "alias" field
+        $router->bind('articles', function ($value) {
+            return Article::where('alias', $value)->first();
+        });
     }
 
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
      * @return void
      */
     public function map(Router $router)
