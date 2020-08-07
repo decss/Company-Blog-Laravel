@@ -50,7 +50,6 @@ class ArticlesRepository extends Repository
             return ['error' => 'Данный псевдоним уже успользуется'];
         }
 
-
         if ($request->hasFile('image')) {
             $image = $request->file('image');
 
@@ -72,14 +71,13 @@ class ArticlesRepository extends Repository
                     Config::get('config.articles_img')['mini']['height'])->save(public_path() . '/' . config('config.theme') . '/images/articles/' . $obj->mini);
 
                 $data['img'] = json_encode($obj);
-
-                $this->model->fill($data);
-
-                if ($request->user()->articles()->save($this->model)) {
-                    return ['status' => 'Материал добавлен'];
-                }
             }
+        }
 
+        $this->model->fill($data);
+
+        if ($request->user()->articles()->save($this->model)) {
+            return ['status' => 'Материал добавлен'];
         }
 
     }
@@ -139,4 +137,18 @@ class ArticlesRepository extends Repository
         }
 
     }
+
+    public function deleteArticle($article)
+    {
+        if (Gate::denies('destroy', $article)) {
+            abort(403);
+        }
+
+        $article->comments()->delete();
+        if ($article->delete()) {
+            return ['status' => 'Материал удален'];
+        }
+    }
+
+
 }

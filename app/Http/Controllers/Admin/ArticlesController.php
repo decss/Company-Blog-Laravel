@@ -72,12 +72,11 @@ class ArticlesController extends AdminController
         $result = $this->a_rep->addArticle($request);
 
         if (is_array($result) && !empty($result['error'])) {
-            return back()->with($result);
+            return redirect('/admin/articles')->with($result);
         }
 
         return redirect('/admin')->with($result);
     }
-
 
     public function show($id)
     {
@@ -114,14 +113,20 @@ class ArticlesController extends AdminController
         $result = $this->a_rep->updateArticle($request, $article);
 
         if (is_array($result) && !empty($result['error'])) {
-            return back()->with($result);
+            return redirect('/admin/articles')->with($result);
         }
 
-        return redirect('/admin')->with($result);
+        return redirect('/admin/articles')->with($result);
     }
 
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $result = $this->a_rep->deleteArticle($article);
+
+		if(is_array($result) && !empty($result['error'])) {
+			return redirect('/admin/articles')->with($result);
+		}
+
+		return redirect('/admin/articles')->with($result);
     }
 }
