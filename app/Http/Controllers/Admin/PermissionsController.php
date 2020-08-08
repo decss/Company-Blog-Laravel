@@ -65,6 +65,13 @@ class PermissionsController extends AdminController
     public function store(Request $request)
     {
         //
+		$result = $this->per_rep->changePermissions($request);
+
+		if(is_array($result) && !empty($result['error'])) {
+			return redirect('/admin/permissions')->with($result);
+		}
+
+		return redirect('/admin/permissions')->with($result);
     }
 
     public function show($id)
