@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
+use App\Filter;
+use App\Http\Requests\MenusRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -21,76 +24,93 @@ class MenusController extends AdminController
     {
         parent::__construct();
 
-        if(Gate::denies('VIEW_ADMIN_MENU')) {
-			abort(403);
-		} 
-        
+        if (Gate::denies('VIEW_ADMIN_MENU')) {
+            abort(403);
+        }
+
         $this->m_rep = $m_rep;
         $this->a_rep = $a_rep;
         $this->p_rep = $p_rep;
-        
-        $this->template = $this->theme.'.admin.menus';
+
+        $this->template = $this->theme . '.admin.menus';
     }
-    
+
     public function index()
     {
         $menu = $this->getMenus();
-        $this->content = view($this->theme.'.admin.menus_content')->with('menus',$menu)->render();
-        
+        $this->content = view($this->theme . '.admin.menus_content')->with('menus', $menu)->render();
+
         return $this->renderOutput();
     }
-    
+
     public function getMenus()
     {
         $menu = $this->m_rep->get();
-        
-        if($menu->isEmpty()) {
-			return FALSE;
-		}
-		
-		return Menu::make('forMenuPart', function($m) use($menu) {
-			
-			foreach($menu as $item) {
-				if($item->parent == 0) {
-					$m->add($item->title,$item->path)->id($item->id);
-				}
-				
-				else {
-					if($m->find($item->parent)) {
-						$m->find($item->parent)->add($item->title,$item->path)->id($item->id);
-					}
-				}
-			}
-		});
+
+        if ($menu->isEmpty()) {
+            return FALSE;
+        }
+
+        return Menu::make('forMenuPart', function ($m) use ($menu) {
+
+            foreach ($menu as $item) {
+                if ($item->parent == 0) {
+                    $m->add($item->title, $item->path)->id($item->id);
+                } else {
+                    if ($m->find($item->parent)) {
+                        $m->find($item->parent)->add($item->title, $item->path)->id($item->id);
+                    }
+                }
+            }
+        });
     }
 
     public function create()
     {
-        //
+        $this->title = 'Новый пункт меню';
+
+        $tmp = $this->getMenus()->roots();
+
+        //null
+        $menus = $tmp->reduce(function ($returnMenus, $menu) {
+            $returnMenus[$menu->id] = $menu->title;
+            return $returnMenus;
+        }, ['0' => 'Родительский пункт меню']);
+
+        $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
+
+        $list = array();
+        $list = array_add($list, '0', 'Не используется');
+        $list = array_add($list, 'parent', 'Раздел блог');
+
+        foreach ($categories as $category) {
+            if ($category->parent_id == 0) {
+                $list[$category->title] = array();
+            } else {
+                $list[$categories->where('id', $category->parent_id)->first()->title][$category->alias] = $category->title;
+            }
+        }
+
+        $articles = $this->a_rep->get(['id', 'title', 'alias']);
+
+        $articles = $articles->reduce(function ($returnArticles, $article) {
+            $returnArticles[$article->alias] = $article->title;
+            return $returnArticles;
+        }, []);
+
+        $filters = Filter::select('id', 'title', 'alias')->get()->reduce(function ($returnFilters, $filter) {
+            $returnFilters[$filter->alias] = $filter->title;
+            return $returnFilters;
+        }, ['parent' => 'Раздел портфолио']);
+
+        $portfolios = $this->p_rep->get(['id', 'alias', 'title'])->reduce(function ($returnPortfolios, $portfolio) {
+            $returnPortfolios[$portfolio->alias] = $portfolio->title;
+            return $returnPortfolios;
+        }, []);
+
+        $this->content = view(env('THEME') . '.admin.menus_create_content')->with(['menus' => $menus, 'categories' => $list, 'articles' => $articles, 'filters' => $filters, 'portfolios' => $portfolios])->render();
+
+        return $this->renderOutput();
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }
