@@ -19,6 +19,8 @@ class PermissionsTableSeeder extends Seeder
             ['name' => 'VIEW_ADMIN_ARTICLES',],
             ['name' => 'ADMIN_USERS',],
             ['name' => 'EDIT_USERS',],
+            ['name' => 'VIEW_ADMIN_MENU',],
+            ['name' => 'EDIT_MENU',],
         ];
 
         DB::table('permissions')->insert($data);
