@@ -211,4 +211,15 @@ class MenusController extends AdminController
         return $this->renderOutput();
     }
 
+    public function update(Request $request, \App\Menu $menu)
+    {
+        $result = $this->m_rep->updateMenu($request, $menu);
+
+        if (is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+
+        return redirect('/admin')->with($result);
+    }
+
 }
