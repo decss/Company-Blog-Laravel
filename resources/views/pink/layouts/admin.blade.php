@@ -18,7 +18,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('config.theme')) }}/css/style-minifield.css" /> <!-- MAIN THEME STYLESHEET -->
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('config.theme')) }}/css/buttons.css" /> <!-- MAIN THEME STYLESHEET -->
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('config.theme')) }}/css/cache-custom.css" /> <!-- MAIN THEME STYLESHEET -->
-        <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('config.theme')) }}/css/cache-custom.css" /> <!-- MAIN THEME STYLESHEET -->
+        <link rel="stylesheet" type="text/css" media="all" href="{{ asset(config('config.theme')) }}/css/jquery-ui.min.css" /> <!-- MAIN THEME STYLESHEET -->
         
         
 		
@@ -29,6 +29,7 @@
         
         <!-- JAVASCRIPTs -->
         <script type="text/javascript" src="{{ asset(config('config.theme')) }}/js/jquery.js"></script>
+        <script type="text/javascript" src="{{ asset(config('config.theme')) }}/js/jquery-ui.min.js"></script>
         {{--<script type="text/javascript" src="{{ asset(config('config.theme')) }}/js/ckeditor/ckeditor.js"></script>--}}
         <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
         <script type="text/javascript" src="{{ asset(config('config.theme')) }}/js/bootstrap-filestyle.min.js"></script>

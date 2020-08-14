@@ -222,4 +222,8 @@ class MenusController extends AdminController
         return redirect('/admin')->with($result);
     }
 
+    public function destroy($id)
+    {
+        //
+    }
 }
