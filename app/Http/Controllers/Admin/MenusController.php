@@ -117,10 +117,10 @@ class MenusController extends AdminController
     {
         $result = $this->m_rep->addMenu($request);
         if (is_array($result) && !empty($result['error'])) {
-            return back()->with($result);
+            return redirect('/admin/menus')->with($result);
         }
 
-        return redirect('/admin')->with($result);
+        return redirect('/admin/menus')->with($result);
     }
 
     public function show($id)
@@ -216,14 +216,20 @@ class MenusController extends AdminController
         $result = $this->m_rep->updateMenu($request, $menu);
 
         if (is_array($result) && !empty($result['error'])) {
-            return back()->with($result);
+            return redirect('/admin/menus')->with($result);
         }
 
-        return redirect('/admin')->with($result);
+        return redirect('/admin/menus')->with($result);
     }
 
-    public function destroy($id)
+    public function destroy(\App\Menu $menu)
     {
-        //
+        $result = $this->m_rep->deleteMenu($menu);
+
+		if(is_array($result) && !empty($result['error'])) {
+			return redirect('/admin/menus')->with($result);
+		}
+
+		return redirect('/admin/menus')->with($result);
     }
 }
