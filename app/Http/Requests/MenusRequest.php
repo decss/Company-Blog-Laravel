@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Auth;
 
 class MenusRequest extends Request
 {
@@ -13,7 +14,7 @@ class MenusRequest extends Request
      */
     public function authorize()
     {
-        return \Auth::user()->canDo('EDIT_MENU');
+        return Auth::user()->canDo('EDIT_MENU');
     }
 
     /**
