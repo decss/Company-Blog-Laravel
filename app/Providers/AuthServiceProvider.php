@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Article;
+use App\Menu;
 use App\Permission;
 use App\Policies\ArticlePolicy;
+use App\Policies\MenusPolicy;
 use App\Policies\PermissionPolicy;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Article::class => ArticlePolicy::class,
         Permission::class => PermissionPolicy::class,
+        Menu::class => MenusPolicy::class,
     ];
 
     /**

@@ -54,11 +54,11 @@ class MenusController extends AdminController
         return Menu::make('forMenuPart', function ($m) use ($menu) {
 
             foreach ($menu as $item) {
-                if ($item->parent == 0) {
+                if ($item->parent_id == 0) {
                     $m->add($item->title, $item->path)->id($item->id);
                 } else {
-                    if ($m->find($item->parent)) {
-                        $m->find($item->parent)->add($item->title, $item->path)->id($item->id);
+                    if ($m->find($item->parent_id)) {
+                        $m->find($item->parent_id)->add($item->title, $item->path)->id($item->id);
                     }
                 }
             }
@@ -81,7 +81,7 @@ class MenusController extends AdminController
 
         $list = array();
         $list = array_add($list, '0', 'Не используется');
-        $list = array_add($list, 'parent', 'Раздел блог');
+        $list = array_add($list, 'parent_id', 'Раздел блог');
 
         foreach ($categories as $category) {
             if ($category->parent_id == 0) {
@@ -101,7 +101,7 @@ class MenusController extends AdminController
         $filters = Filter::select('id', 'title', 'alias')->get()->reduce(function ($returnFilters, $filter) {
             $returnFilters[$filter->alias] = $filter->title;
             return $returnFilters;
-        }, ['parent' => 'Раздел портфолио']);
+        }, ['parent_id' => 'Раздел портфолио']);
 
         $portfolios = $this->p_rep->get(['id', 'alias', 'title'])->reduce(function ($returnPortfolios, $portfolio) {
             $returnPortfolios[$portfolio->alias] = $portfolio->title;
@@ -179,7 +179,7 @@ class MenusController extends AdminController
 
         $list = array();
         $list = array_add($list, '0', 'Не используется');
-        $list = array_add($list, 'parent', 'Раздел блог');
+        $list = array_add($list, 'parent_id', 'Раздел блог');
 
         foreach ($categories as $category) {
             if ($category->parent_id == 0) {
@@ -199,7 +199,7 @@ class MenusController extends AdminController
         $filters = Filter::select('id', 'title', 'alias')->get()->reduce(function ($returnFilters, $filter) {
             $returnFilters[$filter->alias] = $filter->title;
             return $returnFilters;
-        }, ['parent' => 'Раздел портфолио']);
+        }, ['parent_id' => 'Раздел портфолио']);
 
         $portfolios = $this->p_rep->get(['id', 'alias', 'title'])->reduce(function ($returnPortfolios, $portfolio) {
             $returnPortfolios[$portfolio->alias] = $portfolio->title;
