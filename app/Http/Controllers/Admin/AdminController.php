@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Auth;
+use Gate;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -53,11 +54,29 @@ class AdminController extends Controller
     private function getMenu()
     {
         return Menu::make('adminMenu', function ($menu) {
-            $menu->add('Статьи', array('route' => 'admin.articles.index'));
-            $menu->add('Портфолио', array('route' => 'admin.articles.index'));
-            $menu->add('Меню', array('route' => 'admin.menus.index'));
-            $menu->add('Пользователи', array('route' => 'admin.articles.index'));
-            $menu->add('Привилегии', array('route' => 'admin.permissions.index'));
+
+            if (Gate::allows('VIEW_ADMIN_ARTICLES')) {
+                $menu->add('Статьи', array('route' => 'admin.articles.index'));
+            }
+
+            if (Gate::allows('VIEW_ADMIN_MENU')) {
+                $menu->add('Меню', array('route' => 'admin.menus.index'));
+            }
+
+            // if (Gate::allows('VIEW_ADMIN_ARTICLES')) {
+            //     $menu->add('Портфолио', array('route' => 'admin.articles.index'));
+            // }
+
+            // if (Gate::allows('VIEW_ADMIN_ARTICLES')) {
+            //     $menu->add('Пользователи', array('route' => 'admin.articles.index'));
+            // }
+
+            if (Gate::allows('EDIT_USERS')) {
+                $menu->add('Привилегии', array('route' => 'admin.permissions.index'));
+            }
+
+            $menu->add('Сайт', array('route' => 'home'));
+
         });
     }
 
