@@ -17,8 +17,8 @@ class ArticleRequest extends Request
     {
         $validator = parent::getValidatorInstance();
         $validator->sometimes('alias', 'unique:articles|max:255', function ($input) {
-            if ($this->route()->hasParameter('articles')) {
-                $model = $this->route()->parameter('articles');
+            if ($this->route()->hasParameter('article')) {
+                $model = $this->route()->parameter('article');
 
                 // Ignore article uniq alias for self
                 return ($model->alias !== $input->alias)  && !empty($input->alias);

@@ -26,7 +26,7 @@ class AdminController extends Controller
         $this->user = Auth::user();
 
         if (!$this->user) {
-            abort(403);
+            // abort(403);
         }
 
         $this->theme = config('config.theme');
@@ -76,6 +76,7 @@ class AdminController extends Controller
             }
 
             $menu->add('Сайт', array('route' => 'home'));
+            $menu->add('Выйти', array('route' => 'admin.logout'));
 
         });
     }
