@@ -2,6 +2,8 @@
 
 return [
     'theme' => env('THEME', 'pink'),
+    'mailAdmin' => env('MAIL_ADMIN', ''),
+
     'sliderPath' => 'slider-cycle',
     'indexPortfolioCount' => 5,
     'indexArticlesCount' => 3,
@@ -10,8 +12,6 @@ return [
     'recentComments' => 2,
     'recentPortfolios' => 2,
     'portfoliosCount' => 3,
-
-    'mailAdmin' => env('MAIL_ADMIN', ''),
 
     'articles_img' => [
         'max' => ['width' => 816, 'height' => 282],
@@ -22,5 +22,4 @@ return [
         'width' => 1024,
         'height' => 768
     ],
-
 ];
