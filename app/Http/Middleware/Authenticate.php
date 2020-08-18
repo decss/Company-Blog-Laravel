@@ -17,6 +17,7 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        dd(1);
         if (Auth::guard($guard)->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);

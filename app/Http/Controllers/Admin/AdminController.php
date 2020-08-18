@@ -23,13 +23,20 @@ class AdminController extends Controller
 
     public function __construct()
     {
+        $this->theme = config('config.theme');
+    }
+
+    protected function checkAccess($access = null)
+    {
         $this->user = Auth::user();
 
         if (!$this->user) {
-            // abort(403);
+            abort(403);
         }
 
-        $this->theme = config('config.theme');
+        if ($access && Gate::denies($access)) {
+            abort(403);
+        }
     }
 
     protected function renderOutput()

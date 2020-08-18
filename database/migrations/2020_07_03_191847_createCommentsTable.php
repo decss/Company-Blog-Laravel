@@ -16,10 +16,10 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
 
             $table->integer('parent_id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('site');
-            $table->text('text');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('site')->nullable();
+            $table->text('text')->nullable();
 
             $table->timestamps();
         });

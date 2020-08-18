@@ -18,11 +18,7 @@ class PermissionsController extends AdminController
     public function __construct(PermissionsRepository $per_rep, RolesRepository $rol_rep)
     {
         parent::__construct();
-        
-        if(Gate::denies('EDIT_USERS')) {
-			abort(403);
-		}
-        
+
         $this->per_rep = $per_rep;
         $this->rol_rep = $rol_rep;
         
@@ -31,7 +27,7 @@ class PermissionsController extends AdminController
 
     public function index()
     {
-        //
+        $this->checkAccess('EDIT_USERS');
         
         $this->title = "Менеджер прав пользователей";
         
@@ -64,7 +60,8 @@ class PermissionsController extends AdminController
 
     public function store(Request $request)
     {
-        //
+        $this->checkAccess('EDIT_USERS');
+
 		$result = $this->per_rep->changePermissions($request);
 
 		if(is_array($result) && !empty($result['error'])) {

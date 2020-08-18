@@ -24,10 +24,6 @@ class MenusController extends AdminController
     {
         parent::__construct();
 
-        if (Gate::denies('VIEW_ADMIN_MENU')) {
-            abort(403);
-        }
-
         $this->m_rep = $m_rep;
         $this->a_rep = $a_rep;
         $this->p_rep = $p_rep;
@@ -37,6 +33,8 @@ class MenusController extends AdminController
 
     public function index()
     {
+        $this->checkAccess('VIEW_ADMIN_MENU');
+
         $menu = $this->getMenus();
         $this->content = view($this->theme . '.admin.menus_content')->with('menus', $menu)->render();
 
@@ -67,6 +65,8 @@ class MenusController extends AdminController
 
     public function create()
     {
+        $this->checkAccess('VIEW_ADMIN_MENU');
+
         $this->title = 'Новый пункт меню';
 
         $tmp = $this->getMenus()->roots();
@@ -115,6 +115,8 @@ class MenusController extends AdminController
 
     public function store(MenusRequest $request)
     {
+        $this->checkAccess('VIEW_ADMIN_MENU');
+
         $result = $this->m_rep->addMenu($request);
         if (is_array($result) && !empty($result['error'])) {
             return redirect('/admin/menus')->with($result);
@@ -130,6 +132,8 @@ class MenusController extends AdminController
 
     public function edit(\App\Menu $menu)
     {
+        $this->checkAccess('VIEW_ADMIN_MENU');
+
         $this->title = 'Редактирование ссылки - ' . $menu->title;
 
         $type = FALSE;
@@ -213,6 +217,8 @@ class MenusController extends AdminController
 
     public function update(Request $request, \App\Menu $menu)
     {
+        $this->checkAccess('VIEW_ADMIN_MENU');
+
         $result = $this->m_rep->updateMenu($request, $menu);
 
         if (is_array($result) && !empty($result['error'])) {
@@ -224,6 +230,8 @@ class MenusController extends AdminController
 
     public function destroy(\App\Menu $menu)
     {
+        $this->checkAccess('VIEW_ADMIN_MENU');
+
         $result = $this->m_rep->deleteMenu($menu);
 
 		if(is_array($result) && !empty($result['error'])) {

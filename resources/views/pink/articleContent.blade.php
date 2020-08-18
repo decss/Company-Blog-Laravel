@@ -74,7 +74,6 @@
             <form action="{{ route('comment.store') }}" method="post" id="commentform">
                 {{--@csrf--}}
                 {!! csrf_field() !!}
-                {!! csrf_token() !!}
 
                 {{--@if(Auth::check())--}}
                     <p class="comment-form-author">

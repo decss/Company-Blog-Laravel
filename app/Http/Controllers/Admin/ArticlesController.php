@@ -19,16 +19,14 @@ class ArticlesController extends AdminController
     {
         parent::__construct();
 
-        if (Gate::denies('VIEW_ADMIN_ARTICLES')) {
-            abort(403);
-        }
-
         $this->a_rep = $a_rep;
         $this->template = $this->theme . '.admin.articles';
     }
 
     public function index()
     {
+        $this->checkAccess('VIEW_ADMIN_ARTICLES');
+
         $this->title = 'Менеджер статтей';
 
         $articles = $this->getArticles();
@@ -39,6 +37,8 @@ class ArticlesController extends AdminController
 
     public function getArticles()
     {
+        $this->checkAccess('VIEW_ADMIN_ARTICLES');
+
         return $this->a_rep->get();
     }
 
@@ -115,7 +115,6 @@ class ArticlesController extends AdminController
         if (is_array($result) && !empty($result['error'])) {
             return redirect('/admin/articles')->with($result);
         }
-        // dd($result);
 
         return redirect('/admin/articles')->with($result);
     }

@@ -13,8 +13,8 @@ class ChangePortfoliosTable2 extends Migration
     public function up()
     {
         Schema::table('portfolios', function (Blueprint $table) {
-            $table->string('meta_key');
-            $table->string('meta_descr');
+            $table->string('meta_key')->nullable();
+            $table->string('meta_descr')->nullable();
         });
     }
 

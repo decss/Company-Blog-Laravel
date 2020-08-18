@@ -15,14 +15,12 @@ class IndexController extends AdminController
         parent::__construct();
 
         $this->template = $this->theme . '.admin.index';
-
-        if (Gate::denies('VIEW_ADMIN')) {
-            abort(403);
-        }
     }
 
     public function index()
     {
+        $this->checkAccess('VIEW_ADMIN');
+
         $this->title = 'Панель администратора';
 
         return $this->renderOutput();
