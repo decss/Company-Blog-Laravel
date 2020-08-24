@@ -41,7 +41,7 @@ Route::resource('comment', 'CommentController', ['only' => ['store']]);
 
 Route::match(['get','post'],'/contacts',['uses'=>'ContactsController@index','as'=>'contacts']);
 
-Route::get('login', 'Auth\LoginController@showLoginForm');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('admin.logout');
 
