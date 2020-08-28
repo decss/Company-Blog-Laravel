@@ -12,6 +12,7 @@ use App\Repositories\MenusRepository;
 use App\Repositories\ArticlesRepository;
 use App\Repositories\PortfoliosRepository;
 use Gate;
+use Illuminate\Support\Arr;
 use Menu;
 
 
@@ -80,8 +81,8 @@ class MenusController extends AdminController
         $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
 
         $list = array();
-        $list = array_add($list, '0', 'Не используется');
-        $list = array_add($list, 'parent_id', 'Раздел блог');
+        $list = Arr::add($list, '0', 'Не используется');
+        $list = Arr::add($list, 'parent_id', 'Раздел блог');
 
         foreach ($categories as $category) {
             if ($category->parent_id == 0) {
@@ -182,8 +183,8 @@ class MenusController extends AdminController
         $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
 
         $list = array();
-        $list = array_add($list, '0', 'Не используется');
-        $list = array_add($list, 'parent_id', 'Раздел блог');
+        $list = Arr::add($list, '0', 'Не используется');
+        $list = Arr::add($list, 'parent_id', 'Раздел блог');
 
         foreach ($categories as $category) {
             if ($category->parent_id == 0) {

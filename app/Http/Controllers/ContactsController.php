@@ -7,6 +7,7 @@ use App\Repositories\MenusRepository;
 use Config;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Arr;
 use Mail;
 
 class ContactsController extends SiteController
@@ -16,14 +17,14 @@ class ContactsController extends SiteController
     	parent::__construct(new MenusRepository(new Menu));
 
     	$this->bar = 'left';
-    	
+
     	$this->template = config('config.theme') . '.contacts';
 
         $this->heads['title'] = 'Контакты';
         $this->heads['keywords'] = 'Контакты, корпоративный сайт';
         $this->heads['descr'] = 'Контакты на корпроативном сайте';
 	}
-	
+
 	 public function index(Request $request) {
 	 	$theme = config('config.theme');
 
@@ -55,13 +56,13 @@ class ContactsController extends SiteController
 
 	 	$content = view($theme . '.contactContent')->render();
 	 	$errors = '';
-	 	$this->vars = array_add($this->vars, 'content', $content);
-	 	$this->vars = array_add($this->vars, 'errors', $errors);
+	 	$this->vars = Arr::add($this->vars, 'content', $content);
+	 	$this->vars = Arr::add($this->vars, 'errors', $errors);
 
 	 	$this->contentLeftBar = view($theme . '.contactBar')->render();
-	 	
+
 	 	return $this->renderOutput();
     }
-				
-    
+
+
 }

@@ -7,6 +7,7 @@ use App\Repositories\PortfoliosRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Menu;
+use Illuminate\Support\Arr;
 
 class PortfolioController extends SiteController
 {
@@ -29,7 +30,7 @@ class PortfolioController extends SiteController
 
         $portfolios = $this->getPortfolios();
         $content = view($theme . '.portfoliosContent')->with('portfolios', $portfolios)->render();
-        $this->vars = array_add($this->vars, 'content', $content);
+        $this->vars = Arr::add($this->vars, 'content', $content);
 
         return $this->renderOutput();
     }
@@ -42,7 +43,7 @@ class PortfolioController extends SiteController
         $portfolios = $this->getPortfolios(config('config.portfoliosCount'), false);
 
         $content = view($theme . '.portfolioContent')->with(['portfolio' => $portfolio, 'portfolios' => $portfolios])->render();
-        $this->vars = array_add($this->vars, 'content', $content);
+        $this->vars = Arr::add($this->vars, 'content', $content);
 
         $this->heads['title'] = $portfolio->title;
 

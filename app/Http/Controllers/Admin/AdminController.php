@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Menu;
 
 class AdminController extends Controller
@@ -41,18 +42,18 @@ class AdminController extends Controller
 
     protected function renderOutput()
     {
-        $this->vars = array_add($this->vars, 'title', $this->title);
+        $this->vars = Arr::add($this->vars, 'title', $this->title);
 
         $menu = $this->getMenu();
 
         $navigation = view($this->theme . '.admin.navigation')->with('menu', $menu)->render();
-        $this->vars = array_add($this->vars, 'navigation', $navigation);
+        $this->vars = Arr::add($this->vars, 'navigation', $navigation);
 
         $footer = view($this->theme . '.admin.footer')->render();
-        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = Arr::add($this->vars, 'footer', $footer);
 
         if ($this->content) {
-            $this->vars = array_add($this->vars, 'content', $this->content);
+            $this->vars = Arr::add($this->vars, 'content', $this->content);
         }
 
         return view($this->template)->with($this->vars);

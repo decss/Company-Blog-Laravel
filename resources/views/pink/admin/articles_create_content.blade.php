@@ -1,8 +1,8 @@
 <div id="content-page" class="content group">
 				            <div class="hentry group">
 
-{!! Form::open(['url' => (isset($article->id)) ? route('admin.articles.update',['articles'=>$article->alias]) : route('admin.articles.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
-    
+{!! Form::open(['url' => (isset($article->id)) ? route('admin.articles.update', $article->alias) : route('admin.articles.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
+
 	<ul>
 		<li class="text-field">
 			<label for="name-contact-us">
@@ -14,7 +14,7 @@
 			{!! Form::text('title',isset($article->title) ? $article->title  : old('title'), ['placeholder'=>'Введите название страницы']) !!}
 			 </div>
 		 </li>
-		 
+
 		 <li class="text-field">
 			<label for="name-contact-us">
 				<span class="label">Ключевые слова:</span>
@@ -25,7 +25,7 @@
 			{!! Form::text('meta_key', isset($article->meta_key) ? $article->meta_key  : old('meta_key'), ['placeholder'=>'Введите название страницы']) !!}
 			 </div>
 		 </li>
-		 
+
 		 <li class="text-field">
 			<label for="name-contact-us">
 				<span class="label">Мета описание:</span>
@@ -36,7 +36,7 @@
 			{!! Form::text('meta_descr', isset($article->meta_descr) ? $article->meta_descr  : old('meta_descr'), ['placeholder'=>'Введите название страницы']) !!}
 			 </div>
 		 </li>
-		 
+
 		 <li class="text-field">
 			<label for="name-contact-us">
 				<span class="label">Псевдоним:</span>
@@ -47,7 +47,7 @@
 			{!! Form::text('alias', isset($article->alias) ? $article->alias  : old('alias'), ['placeholder'=>'Введите псевдоним страницы']) !!}
 			 </div>
 		 </li>
-		 
+
 		 <li class="textarea-field">
 			<label for="message-contact-us">
 				 <span class="label">Краткое описание:</span>
@@ -57,7 +57,7 @@
 			</div>
 			<div class="msg-error"></div>
 		</li>
-		
+
 		<li class="textarea-field">
 			<label for="message-contact-us">
 				 <span class="label">Описание:</span>
@@ -67,21 +67,21 @@
 			</div>
 			<div class="msg-error"></div>
 		</li>
-		
+
 		@if(isset($article->img->path))
 			<li class="textarea-field">
-				
+
 				<label>
 					 <span class="label">Изображения материала:</span>
 				</label>
-				
+
 				{{ Html::image(asset(env('THEME')).'/images/articles/'.$article->img->path,'',['style'=>'width:400px']) }}
 				{!! Form::hidden('old_image',$article->img->path) !!}
-			
+
 				</li>
 		@endif
-		
-		
+
+
 		<li class="text-field">
 			<label for="name-contact-us">
 				<span class="label">Изображение:</span>
@@ -91,9 +91,9 @@
 			<div class="input-prepend">
 				{!! Form::file('image', ['class' => 'filestyle','data-buttonText'=>'Выберите изображение','data-buttonName'=>"btn-primary",'data-placeholder'=>"Файла нет"]) !!}
 			 </div>
-			 
+
 		</li>
-		
+
 		<li class="text-field">
 			<label for="name-contact-us">
 				<span class="label">Категория:</span>
@@ -103,24 +103,24 @@
 			<div class="input-prepend">
 				{!! Form::select('category_id', $categories,isset($article->category_id) ? $article->category_id  : '') !!}
 			 </div>
-			 
-		</li>	 
-		
+
+		</li>
+
 		@if(isset($article->id))
-			<input type="hidden" name="_method" value="PUT">		
-		
+			<input type="hidden" name="_method" value="PUT">
+
 		@endif
 
-		<li class="submit-button"> 
-			{!! Form::button('Сохранить', ['class' => 'btn btn-the-salmon-dance-3','type'=>'submit']) !!}			
+		<li class="submit-button">
+			{!! Form::button('Сохранить', ['class' => 'btn btn-the-salmon-dance-3','type'=>'submit']) !!}
 		</li>
-		 
+
 	</ul>
-	
-    
-    
-    
-    
+
+
+
+
+
 {!! Form::close() !!}
 
  <script>

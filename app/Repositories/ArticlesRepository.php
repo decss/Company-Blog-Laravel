@@ -6,6 +6,8 @@ namespace App\Repositories;
 use App\Article;
 use Config;
 use Gate;
+// use Illuminate\Support\Str;
+use Str;
 use Intervention\Image\Facades\Image;
 
 
@@ -40,7 +42,7 @@ class ArticlesRepository extends Repository
         }
 
         if (empty($data['alias'])) {
-            $data['alias'] = str_slug($data['title']);
+            $data['alias'] = Str::slug($data['title']);
         }
 
         if ($this->one($data['alias'], FALSE)) {
@@ -54,7 +56,7 @@ class ArticlesRepository extends Repository
             $image = $request->file('image');
 
             if ($image->isValid()) {
-                $str = str_random(8);
+                $str = Str::random(8);
                 $obj = new \stdClass;
                 $obj->mini = $str . '_mini.jpg';
                 $obj->max = $str . '_max.jpg';
@@ -95,7 +97,7 @@ class ArticlesRepository extends Repository
         }
 
         if (empty($data['alias'])) {
-            $data['alias'] = str_slug($data['title']);
+            $data['alias'] = Str::slug($data['title']);
         }
 
         $result = $this->one($data['alias'], FALSE);
@@ -110,7 +112,7 @@ class ArticlesRepository extends Repository
             $image = $request->file('image');
 
             if ($image->isValid()) {
-                $str = str_random(8);
+                $str = Str::random(8);
                 $obj = new \stdClass;
                 $obj->mini = $str . '_mini.jpg';
                 $obj->max = $str . '_max.jpg';

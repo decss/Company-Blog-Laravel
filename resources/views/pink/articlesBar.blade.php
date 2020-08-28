@@ -13,7 +13,7 @@
                            title="{{ $portfolio->title }}" class="title">
                             {{ $portfolio->title }}
                         </a>
-                        <p>{{ str_limit($portfolio->text, 130) }}</p>
+                        <p>{{ Str::limit($portfolio->text, 130) }}</p>
                         <a class="read-more" href="{{ route('portfolios.show', ['alias' => $portfolio->alias]) }}">
                             &rarr; {{ Lang::get('ru.readMore') }}
                         </a>
@@ -35,7 +35,7 @@
                     <span class="author"><strong><a href="mailto:{{ $comment->user->email }}">{{ $comment->user->name }}</a></strong> in</span>
                     <a class="title" href="{{ route('articles.show', ['alias' => $comment->article->alias]) }}">{{ $comment->article->title }}</a>
                     <p class="comment">
-                        {{ str_limit($comment->text, 100) }}
+                        {{ Str::limit($comment->text, 100) }}
                         <a class="goto" href="{{ route('articles.show', ['alias' => $comment->article->alias]) }}#respond">&#187;</a>
                     </p>
                 </div>

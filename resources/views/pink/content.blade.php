@@ -20,7 +20,7 @@
                             <div class="work-description">
                                 <h2><a href="{{ route('portfolios.show', ['alias' => $item->alias]) }}">{{ $item->title }}</a></h2>
                                 <p class="work-categories">in: <a href="#">{{ $item->filter->title }}</a></p>
-                                <p>{{ str_limit($item->text, 200) }}</p>
+                                <p>{{ Str::limit($item->text, 200) }}</p>
                                 <a href="{{ route('portfolios.show', ['alias' => $item->alias]) }}" class="read-more">Read more</a>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <h4><a href="#">{{ $item->title }}</a></h4>
-                            <p>{{ str_limit($item->text, 100) }}</p>
+                            <p>{{ Str::limit($item->text, 100) }}</p>
                         </div>
                     @endforeach
                 </div>

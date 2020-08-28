@@ -9,6 +9,7 @@ use App\Repositories\MenusRepository;
 use App\Repositories\PortfoliosRepository;
 use App\Menu;
 use Config;
+use Illuminate\Support\Arr;
 
 class ArticleController extends SiteController
 {
@@ -34,7 +35,7 @@ class ArticleController extends SiteController
 
         $articles = $this->getArticles($alias);
         $content = view($theme . '.articlesContent')->with('articles', $articles)->render();
-        $this->vars = array_add($this->vars, 'content', $content);
+        $this->vars = Arr::add($this->vars, 'content', $content);
 
         $comments = $this->getComments(Config::get('config.recentComments'));
         $portfolios = $this->getPortfolios(Config::get('config.recentPortfolios'));
@@ -58,7 +59,7 @@ class ArticleController extends SiteController
         // dd($article->comments->groupBy('parent_id'));
 
         $content = view($theme . '.articleContent')->with('article', $article)->render();
-        $this->vars = array_add($this->vars, 'content', $content);
+        $this->vars = Arr::add($this->vars, 'content', $content);
 
         $comments = $this->getComments(Config::get('config.recentComments'));
         $portfolios = $this->getPortfolios(Config::get('config.recentPortfolios'));

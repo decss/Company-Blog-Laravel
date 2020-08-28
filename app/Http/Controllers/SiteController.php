@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use \Menu;
 use App\Repositories\MenusRepository;
 use Illuminate\Http\Request;
@@ -39,22 +40,22 @@ class SiteController extends Controller
         $menuBuilder = $this->getMenu();
 
         $navigation = view($theme . '.navigation')->with('menu', $menuBuilder)->render();
-        $this->vars = array_add($this->vars, 'navigation', $navigation);
+        $this->vars = Arr::add($this->vars, 'navigation', $navigation);
 
         if ($this->contentRightBar) {
             $rightBar = view($theme . '.rightBar')->with('contentRightBar', $this->contentRightBar)->render();
-            $this->vars = array_add($this->vars, 'rightBar', $rightBar);
+            $this->vars = Arr::add($this->vars, 'rightBar', $rightBar);
         }
         if ($this->contentLeftBar) {
             $leftBar = view($theme . '.leftBar')->with('contentLeftBar', $this->contentLeftBar)->render();
-            $this->vars = array_add($this->vars, 'leftBar', $leftBar);
+            $this->vars = Arr::add($this->vars, 'leftBar', $leftBar);
         }
-        
-        $this->vars = array_add($this->vars, 'bar', $this->bar);
-        $this->vars = array_add($this->vars, 'heads', $this->heads);
+
+        $this->vars = Arr::add($this->vars, 'bar', $this->bar);
+        $this->vars = Arr::add($this->vars, 'heads', $this->heads);
 
         $footer = view($theme . '.footer')->render();
-        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = Arr::add($this->vars, 'footer', $footer);
 
         return view($this->template)->with($this->vars);
     }

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Config;
 
 use App\Http\Requests;
+use Illuminate\Support\Arr;
 
 class IndexController extends SiteController
 {
@@ -33,11 +34,11 @@ class IndexController extends SiteController
 
         $slidersItems = $this->getSliders();
         $sliders = view($theme . '.slider')->with('sliders', $slidersItems)->render();
-        $this->vars = array_add($this->vars, 'sliders', $sliders);
+        $this->vars = Arr::add($this->vars, 'sliders', $sliders);
 
         $portfoliosItems = $this->getPortfolios();
         $portfolios = view($theme . '.content')->with('portfolios', $portfoliosItems)->render();
-        $this->vars = array_add($this->vars, 'content', $portfolios);
+        $this->vars = Arr::add($this->vars, 'content', $portfolios);
 
         $articles = $this->getArticles();
         $this->contentRightBar = view($theme . '.indexBar')->with('articles', $articles)->render();
