@@ -18,9 +18,9 @@
     <!-- this line will appear only if the website is visited with an iPad -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes"/>
 
-    <title>{{ $heads['title'] or 'Pink' }}</title>
-    <meta name="keywords" content="{{ $heads['keywords'] or 'Pink keywords' }}">
-    <meta name="description" content="{{ $heads['descr'] or 'Pink description' }}">
+    <title>{{ (isset($heads['title']) ? $heads['title'] : 'Pink') }}</title>
+    <meta name="keywords" content="{{ (isset($heads['keywords']) ? $heads['keywords'] : 'Pink keywords') }}">
+    <meta name="description" content="{{ (isset($heads['descr']) ? $heads['descr'] : 'Pink description') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- [favicon] begin -->
