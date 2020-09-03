@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Permission;
+use App\Models\Permission;
 use Gate;
 
 class PermissionsRepository extends Repository

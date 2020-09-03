@@ -3,7 +3,7 @@
 
 namespace App\Repositories;
 
-use App\Portfolio;
+use App\Models\Portfolio;
 
 
 class PortfoliosRepository extends Repository

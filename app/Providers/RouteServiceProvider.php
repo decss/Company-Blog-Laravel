@@ -2,25 +2,21 @@
 
 namespace App\Providers;
 
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
-use App\Article;
-use App\Menu;
+use App\Models\Article;
+use App\Models\Menu;
 
 
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'App\Http\Controllers';
-
-    /**
      * The path to the "home" route for your application.
+     *
+     * This is used by Laravel authentication to redirect users after login.
      *
      * @var string
      */
@@ -34,59 +30,35 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::pattern('alias', '[\w-]+');
-        parent::boot();
-
         // Bind artucle selecting by "alias" field
         Route::bind('article', function ($value) {
             return Article::where('alias', $value)->first();
         });
-
         Route::bind('menu', function ($value) {
             return Menu::where('id', $value)->first();
         });
-    }
 
-        /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
-    public function map()
-    {
+        $this->configureRateLimiting();
 
-        $this->mapApiRoutes();
+        $this->routes(function () {
+            Route::middleware('web')
+                ->group(base_path('routes/web.php'));
 
-        $this->mapWebRoutes();
-
-        //
+            Route::prefix('api')
+                ->middleware('api')
+                ->group(base_path('routes/api.php'));
+        });
     }
 
     /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
+     * Configure the rate limiters for the application.
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function configureRateLimiting()
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60);
+        });
     }
 }

@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-use App\User;
+use App\Models\User;
 
 class MenusPolicy
 {
@@ -19,7 +19,7 @@ class MenusPolicy
     {
         //
     }
-    
+
      public function save(User $user)
     {
         return $user->canDo('EDIT_MENU');

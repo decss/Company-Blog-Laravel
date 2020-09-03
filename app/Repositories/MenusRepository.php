@@ -3,7 +3,7 @@
 
 namespace App\Repositories;
 
-use App\Menu;
+use App\Models\Menu;
 use Gate;
 
 

@@ -6,7 +6,7 @@ use App\Repositories\MenusRepository;
 use App\Repositories\PortfoliosRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Menu;
+use App\Models\Menu;
 use Illuminate\Support\Arr;
 
 class PortfolioController extends SiteController

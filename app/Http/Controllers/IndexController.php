@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Menu;
+use App\Models\Menu;
 use App\Repositories\ArticlesRepository;
 use App\Repositories\MenusRepository;
 use App\Repositories\PortfoliosRepository;

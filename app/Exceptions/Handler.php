@@ -6,7 +6,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use App\Repositories\MenusRepository;
 use App\Http\Controllers\SiteController;
-use App\Menu;
+use App\Models\Menu;
 use Log;
 
 class Handler extends ExceptionHandler

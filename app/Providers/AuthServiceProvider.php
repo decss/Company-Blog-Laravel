@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use App\Article;
-use App\Menu;
-use App\Permission;
+use App\Models\Article;
+use App\Models\Menu;
+use App\Models\Permission;
 use App\Policies\ArticlePolicy;
 use App\Policies\MenusPolicy;
 use App\Policies\PermissionPolicy;

@@ -3,7 +3,7 @@
 
 namespace App\Repositories;
 
-use App\Article;
+use App\Models\Article;
 use Config;
 use Gate;
 // use Illuminate\Support\Str;

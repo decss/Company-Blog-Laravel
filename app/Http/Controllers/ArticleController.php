@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Models\Category;
 use App\Repositories\ArticlesRepository;
 use App\Repositories\CommentsRepository;
 use App\Repositories\MenusRepository;
 use App\Repositories\PortfoliosRepository;
-use App\Menu;
+use App\Models\Menu;
 use Config;
 use Illuminate\Support\Arr;
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
-use App\Filter;
+use App\Models\Category;
+use App\Models\Filter;
 use App\Http\Requests\MenusRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -131,7 +131,7 @@ class MenusController extends AdminController
         //
     }
 
-    public function edit(\App\Menu $menu)
+    public function edit(\App\Models\Menu $menu)
     {
         $this->checkAccess('VIEW_ADMIN_MENU');
 
@@ -216,7 +216,7 @@ class MenusController extends AdminController
         return $this->renderOutput();
     }
 
-    public function update(Request $request, \App\Menu $menu)
+    public function update(Request $request, \App\Models\Menu $menu)
     {
         $this->checkAccess('VIEW_ADMIN_MENU');
 
@@ -229,7 +229,7 @@ class MenusController extends AdminController
         return redirect('/admin/menus')->with($result);
     }
 
-    public function destroy(\App\Menu $menu)
+    public function destroy(\App\Models\Menu $menu)
     {
         $this->checkAccess('VIEW_ADMIN_MENU');
 

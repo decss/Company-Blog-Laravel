@@ -1,3 +1,3 @@
-## Laravel 5.2 test project
+## Laravel 5.2 test project 
 
-Simple corporate website 
+Simple corporate website (currently updated to Laravel 8)
